@@ -14,7 +14,7 @@ os.chdir(scriptDir)
 
 options = Options()
 options.page_load_strategy = 'normal'
-# options.headless = True
+options.headless = True
 
 # Odkomentuj poniżej jeśli nie masz zainstalowanego Chrome'a
 # driver = webdriver.Chrome( ChromeDriverManager().install(), options = options )
@@ -29,6 +29,12 @@ searchInput.send_keys("django")
 buttonSubmit = driver.find_element(By.ID, "submit")
 buttonSubmit.click()
 driver.save_screenshot("python.org.1.png")
+driver.find_element(By.TAG_NAME, "body").screenshot("python.org.2.png")
+
+# Za pomocą selenium wywołuje kod JavaSript z poziomu Pythona
+func = lambda arg: driver.execute_script("return document.body.parentNode.scroll"+arg)
+driver.set_window_size( func("Width"), func("Height") )
+driver.find_element(By.TAG_NAME, "body").screenshot("python.org.3.png")
 
 time.sleep(10)
 driver.quit()
