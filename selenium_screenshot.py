@@ -11,8 +11,6 @@ import os
 
 scriptDir = os.path.dirname(__file__)
 os.chdir(scriptDir)
-# /html/body/div/header/div/div[1]/div/form/fieldset/input
-# //*[@id="id-search-field"]
 
 options = Options()
 options.page_load_strategy = 'normal'
@@ -28,5 +26,9 @@ searchInput = driver.find_element(By.ID, "id-search-field")
 # searchInput = driver.find_element_by_xpath('//*[@id="id-search-field"]') # To już nie zadziała w Selenium_v4
 searchInput.send_keys("django")
 
-time.sleep(25)
+buttonSubmit = driver.find_element(By.ID, "submit")
+buttonSubmit.click()
+driver.save_screenshot("python.org.1.png")
+
+time.sleep(10)
 driver.quit()
